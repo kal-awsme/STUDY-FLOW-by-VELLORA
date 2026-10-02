@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#eef8ff" />
+  <meta name="description" content="STUDYFLOW by VELLORA — a calm personal productivity workspace." />
+  <title>STUDYFLOW by VELLORA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-bg" aria-hidden="true"><span class="orb orb-a"></span><span class="orb orb-b"></span><span class="orb orb-c"></span></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" data-action="go-home" aria-label="STUDYFLOW by VELLORA">
+        <span class="brand-mark">S</span>
+        <span class="brand-copy"><strong>STUDYFLOW</strong><small>by VELLORA</small></span>
+      </button>
+      <button class="icon-btn glass" data-action="open-notifications" aria-label="Notifications"><span data-icon="bell"></span><i class="notification-dot hidden"></i></button>
+    </header>
+
+    <main id="app-main" class="main-content" tabindex="-1">
+      <!-- HOME -->
+      <section class="view active" data-view="home">
+        <div class="hero-copy reveal">
+          <p class="eyebrow" data-i18n="greeting">Good evening</p>
+          <h1 data-i18n="heroTitle">What should I focus on?</h1>
+          <p class="hero-sub" data-i18n="heroSub">Keep your momentum gentle and consistent.</p>
+        </div>
+
+        <section id="priority-card" class="priority-card glass-card reveal delay-1"></section>
+
+        <section class="section-block reveal delay-2">
+          <div class="section-head"><div><p class="section-kicker" data-i18n="todayFocus">Today's focus</p><h2 id="focus-section-title">Your next step</h2></div><button class="text-btn" data-action="open-plan" data-i18n="viewPlan">View plan</button></div>
+          <div id="today-focus"></div>
+        </section>
+
+        <section class="section-block reveal delay-3">
+          <div class="section-head"><div><p class="section-kicker" data-i18n="upcoming">Upcoming</p><h2 data-i18n="upcomingTitle">Keep an eye on these</h2></div><button class="text-btn" data-action="open-calendar" data-i18n="seeAll">See all</button></div>
+          <div id="upcoming-list" class="stack"></div>
+        </section>
+
+        <section class="section-block reveal delay-4">
+          <div id="momentum-mini"></div>
+        </section>
+      </section>
+
+      <!-- WORKSPACE -->
+      <section class="view" data-view="workspace">
+        <div class="page-heading"><div><p class="eyebrow" data-i18n="workspaceKicker">Your space</p><h1 data-i18n="workspaceTitle">Workspace</h1><p data-i18n="workspaceSub">Shape it around your life.</p></div><button class="round-add" data-action="add-folder" aria-label="Add folder">+</button></div>
+        <div class="search-wrap glass"><span data-icon="search"></span><input id="workspace-search" data-i18n-placeholder="search" placeholder="Search folders and tasks" autocomplete="off" /></div>
+        <div id="folder-grid" class="folder-grid"></div>
+        <div class="empty-hint glass-card"><span class="hint-icon" data-icon="sparkles"></span><div><strong data-i18n="workspaceHintTitle">Make it yours</strong><p data-i18n="workspaceHint">Create folders for school, work, personal goals, projects, or anything else that matters.</p></div></div>
+      </section>
+
+      <!-- PLAN -->
+      <section class="view" data-view="plan">
+        <div class="page-heading"><div><p class="eyebrow" data-i18n="planKicker">Your timeline</p><h1 data-i18n="planTitle">Plan</h1><p data-i18n="planSub">Everything in one calm view.</p></div><button class="round-add" data-action="add-task" aria-label="Add task">+</button></div>
+        <div class="filter-row glass" id="time-filters">
+          <button data-range="today" class="active" data-i18n="today">Today</button>
+          <button data-range="week" data-i18n="thisWeek">This week</button>
+          <button data-range="month" data-i18n="thisMonth">This month</button>
+          <button data-range="year" data-i18n="thisYear">This year</button>
+          <button data-range="all" data-i18n="all">All</button>
+        </div>
+        <div id="plan-summary" class="plan-summary"></div>
+        <div id="plan-list" class="stack"></div>
+      </section>
+
+      <!-- FOCUS -->
+      <section class="view" data-view="focus">
+        <div class="page-heading"><div><p class="eyebrow" data-i18n="focusKicker">Deep work</p><h1 data-i18n="focusTitle">Focus</h1><p data-i18n="focusSub">One task. One session. No rush.</p></div></div>
+        <div id="focus-panel" class="focus-panel glass-card"></div>
+        <div class="focus-tips glass-card"><div class="tip-dot"></div><div><strong data-i18n="focusTipTitle">A small session still counts.</strong><p data-i18n="focusTip">Start with what matters most, then let momentum do the rest.</p></div></div>
+      </section>
+
+      <!-- CALENDAR -->
+      <section class="view" data-view="calendar">
+        <div class="page-heading"><div><p class="eyebrow" data-i18n="calendarKicker">Your dates</p><h1 data-i18n="calendarTitle">Calendar</h1><p data-i18n="calendarSub">See deadlines without the noise.</p></div></div>
+        <div class="calendar-card glass-card">
+          <div class="calendar-head"><button class="icon-btn" data-action="calendar-prev" aria-label="Previous month"><span data-icon="chevron-left"></span></button><div id="calendar-label"></div><button class="icon-btn" data-action="calendar-next" aria-label="Next month"><span data-icon="chevron-right"></span></button></div>
+          <div class="weekdays" id="weekdays"></div>
+          <div class="calendar-grid" id="calendar-grid"></div>
+        </div>
+        <div id="calendar-agenda" class="stack"></div>
+      </section>
+
+      <!-- PROGRESS -->
+      <section class="view" data-view="progress">
+        <div class="page-heading"><div><p class="eyebrow" data-i18n="progressKicker">Keep moving</p><h1 data-i18n="progressTitle">Progress</h1><p data-i18n="progressSub">Your momentum, without pressure.</p></div></div>
+        <div id="progress-hero"></div>
+        <div id="progress-stats" class="stat-grid"></div>
+        <div class="section-block"><div class="section-head"><div><p class="section-kicker" data-i18n="recentActivity">Recent activity</p><h2 data-i18n="smallWins">Small wins add up.</h2></div></div><div id="activity-list" class="stack"></div></div>
+      </section>
+
+      <!-- MORE -->
+      <section class="view" data-view="more">
+        <div class="page-heading"><div><p class="eyebrow" data-i18n="moreKicker">More space</p><h1 data-i18n="moreTitle">More</h1><p data-i18n="moreSub">Tools that support your flow.</p></div></div>
+        <div class="more-grid">
+          <button class="feature-tile glass-card" data-action="open-calendar"><span class="tile-icon blue" data-icon="calendar"></span><span><strong data-i18n="calendarTitle">Calendar</strong><small data-i18n="calendarSubShort">Deadlines & dates</small></span><span data-icon="chevron-right"></span></button>
+          <button class="feature-tile glass-card" data-action="open-progress"><span class="tile-icon gold" data-icon="flame"></span><span><strong data-i18n="progressTitle">Progress</strong><small data-i18n="progressSubShort">Momentum & stats</small></span><span data-icon="chevron-right"></span></button>
+          <button class="feature-tile glass-card" data-action="open-settings"><span class="tile-icon blue" data-icon="settings"></span><span><strong data-i18n="settingsTitle">Settings</strong><small data-i18n="settingsSubShort">Language & reminders</small></span><span data-icon="chevron-right"></span></button>
+          <button class="feature-tile glass-card" data-action="open-about"><span class="tile-icon soft" data-icon="info"></span><span><strong data-i18n="aboutTitle">About</strong><small>STUDYFLOW by VELLORA</small></span><span data-icon="chevron-right"></span></button>
+        </div>
+        <div class="brand-footer"><span class="brand-mark small">S</span><div><strong>STUDYFLOW</strong><small>by VELLORA</small></div><span class="version">v1.0</span></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav glass" aria-label="Primary navigation">
+      <button data-nav="home" class="active"><span data-icon="home"></span><small data-i18n="navHome">Home</small></button>
+      <button data-nav="workspace"><span data-icon="folder"></span><small data-i18n="navWorkspace">Workspace</small></button>
+      <button data-nav="plan"><span data-icon="check-square"></span><small data-i18n="navPlan">Plan</small></button>
+      <button data-nav="focus"><span data-icon="timer"></span><small data-i18n="navFocus">Focus</small></button>
+      <button data-nav="more"><span data-icon="more"></span><small data-i18n="navMore">More</small></button>
+    </nav>
+  </div>
+
+  <!-- SHEET BACKDROP -->
+  <div id="sheet-backdrop" class="sheet-backdrop hidden"></div>
+
+  <!-- TASK SHEET -->
+  <section id="task-sheet" class="bottom-sheet hidden" aria-modal="true" role="dialog" aria-labelledby="task-sheet-title">
+    <div class="sheet-handle"></div><div class="sheet-head"><div><p class="eyebrow" data-i18n="taskSheetKicker">Build your next step</p><h2 id="task-sheet-title" data-i18n="addTaskTitle">Add task</h2></div><button class="icon-btn" data-action="close-sheet" aria-label="Close"><span data-icon="x"></span></button></div>
+    <form id="task-form" class="form-grid">
+      <input type="hidden" id="task-id" />
+      <label><span data-i18n="taskName">Task name</span><input id="task-title" required maxlength="100" data-i18n-placeholder="taskPlaceholder" placeholder="e.g. Review chapter 4" /></label>
+      <div class="form-two"><label><span data-i18n="folderLabel">Folder</span><select id="task-folder"></select></label><label><span data-i18n="priorityLabel">Priority</span><select id="task-priority"></select></label></div>
+      <div class="form-two"><label><span data-i18n="deadlineLabel">Deadline</span><input id="task-deadline" type="datetime-local" /></label><label><span data-i18n="reminderLabel">Reminder</span><select id="task-reminder"><option value="none">None</option><option value="1440">1 day before</option><option value="60">1 hour before</option><option value="15">15 minutes before</option></select></label></div>
+      <label><span data-i18n="notesLabel">Notes</span><textarea id="task-notes" rows="3" maxlength="300" data-i18n-placeholder="notesPlaceholder" placeholder="Optional note"></textarea></label>
+      <button class="primary-btn" type="submit" id="task-submit" data-i18n="addTask">Add task</button>
+    </form>
+  </section>
+
+  <!-- FOLDER SHEET -->
+  <section id="folder-sheet" class="bottom-sheet compact hidden" aria-modal="true" role="dialog">
+    <div class="sheet-handle"></div><div class="sheet-head"><div><p class="eyebrow" data-i18n="folderSheetKicker">Make your own space</p><h2 id="folder-sheet-title" data-i18n="newFolder">New folder</h2></div><button class="icon-btn" data-action="close-sheet"><span data-icon="x"></span></button></div>
+    <form id="folder-form" class="form-grid"><input type="hidden" id="folder-id" /><label><span data-i18n="folderName">Folder name</span><input id="folder-name" required maxlength="40" data-i18n-placeholder="folderPlaceholder" placeholder="e.g. School" /></label><button class="primary-btn" type="submit" data-i18n="saveFolder">Save folder</button></form>
+  </section>
+
+  <!-- TASK DETAIL -->
+  <section id="detail-sheet" class="bottom-sheet hidden" aria-modal="true" role="dialog">
+    <div class="sheet-handle"></div><div id="detail-content"></div>
+  </section>
+
+  <!-- SETTINGS SHEET -->
+  <section id="settings-sheet" class="bottom-sheet hidden" aria-modal="true" role="dialog">
+    <div class="sheet-handle"></div><div class="sheet-head"><div><p class="eyebrow" data-i18n="settingsKicker">Personalize</p><h2 data-i18n="settingsTitle">Settings</h2></div><button class="icon-btn" data-action="close-sheet"><span data-icon="x"></span></button></div>
+    <div class="settings-list">
+      <div class="setting-row"><div><strong data-i18n="language">Language</strong><small data-i18n="languageSub">Choose your interface language.</small></div><select id="language-select"><option value="en">English</option><option value="id">Indonesia</option></select></div>
+      <div class="setting-row"><div><strong data-i18n="notifications">Notifications</strong><small data-i18n="notificationsSub">Deadline reminders while StudyFlow is active.</small></div><button id="notification-toggle" class="toggle" data-action="toggle-notifications" aria-pressed="false"><span></span></button></div>
+      <div class="setting-row"><div><strong data-i18n="demoData">Demo data</strong><small data-i18n="demoDataSub">Reset the workspace to the polished starter set.</small></div><button class="ghost-btn" data-action="reset-demo" data-i18n="reset">Reset</button></div>
+      <div class="setting-row danger-row"><div><strong data-i18n="clearData">Clear local data</strong><small data-i18n="clearDataSub">Remove all folders and tasks from this browser.</small></div><button class="ghost-btn danger" data-action="clear-data" data-i18n="clear">Clear</button></div>
+    </div>
+  </section>
+
+  <!-- NOTIFICATIONS SHEET -->
+  <section id="notifications-sheet" class="bottom-sheet compact hidden" aria-modal="true" role="dialog">
+    <div class="sheet-handle"></div><div class="sheet-head"><div><p class="eyebrow" data-i18n="notificationsKicker">Stay aware</p><h2 data-i18n="notificationsTitle">Notifications</h2></div><button class="icon-btn" data-action="close-sheet"><span data-icon="x"></span></button></div>
+    <div id="notification-list" class="stack"></div>
+  </section>
+
+  <!-- ABOUT SHEET -->
+  <section id="about-sheet" class="bottom-sheet compact hidden" aria-modal="true" role="dialog">
+    <div class="sheet-handle"></div><div class="about-card"><div class="brand-mark hero">S</div><p class="eyebrow">STUDYFLOW</p><h2>by VELLORA</h2><p data-i18n="aboutText">A calm personal productivity workspace built to help you focus on what matters next.</p><div class="about-pill">HTML • CSS • JavaScript • LocalStorage</div></div>
+  </section>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"><span id="toast-icon"></span><span id="toast-text"></span></div>
+  <div id="sr-live" class="sr-only" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
